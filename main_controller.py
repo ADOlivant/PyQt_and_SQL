@@ -29,11 +29,18 @@ class MainWindow(QMainWindow):
 
         self.create_table_model()
 
+        #connection
+        self.submit_changes_button.clicked.connect(self.update_customers)
+
     def create_table_model(self):
         self.model = QSqlTableModel()
         self.model.setTable("Customer")
+        self.model.setEditStrategy(QSqlTableModel.OnManualSubmit)
         self.table_view.setModel(self.model)
         self.table_view.model().select()
+
+    def update_customers(self):
+        self.model.submitAll()        
 
 if __name__ == "__main__":
     application = QApplication(sys.argv)
@@ -41,6 +48,3 @@ if __name__ == "__main__":
     window.show()
     window.raise_()
     application.exec_()
-        
-
-        
