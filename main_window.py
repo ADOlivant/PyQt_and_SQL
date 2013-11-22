@@ -59,13 +59,17 @@ class MainWindow(QMainWindow):
 
         #Connections
         self.browse_customer.triggered.connect(self.browse_customers)
+        self.browse_product_type.triggered.connect(self.browse_product_type_widget)
         
 
     def browse_customers(self):
-        self.browse_widget = BrowseData(self.db)
+        self.browse_widget = BrowseData(self.db,"Customer")
         self.setCentralWidget(self.browse_widget)
-        print("Hello")
-        
+
+    def browse_product_type_widget(self):
+        self.browse_product_type_widget = BrowseData(self.db,"ProdcutType")
+        self.setCentralWidget(self.browse_product_type_widget)
+
 if __name__ == "__main__":
     application = QApplication(sys.argv)
     window = MainWindow()

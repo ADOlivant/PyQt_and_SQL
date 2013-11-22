@@ -6,10 +6,11 @@ import sys
 
 class BrowseData(QWidget):
     """to browse data using table view"""
-    def __init__(self,db):
+    def __init__(self,db,table):
         super().__init__()
 
         self.db = db
+        self.table = table
 
         self.table_view = QTableView()
         self.submit_changes_button = QPushButton("Submit Changes")
@@ -27,7 +28,7 @@ class BrowseData(QWidget):
 
     def create_table_model(self):
         self.model = QSqlTableModel()
-        self.model.setTable("Customer")
+        self.model.setTable(self.table)
         self.model.setEditStrategy(QSqlTableModel.OnManualSubmit)
         self.table_view.setModel(self.model)
         self.table_view.model().select()
